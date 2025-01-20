@@ -59,3 +59,4 @@ This project aims to create an engaging and user-specific platform where individ
 5. **Hosting:**
 
 - Vercel for the frontend and Heroku for the backend
+-------
