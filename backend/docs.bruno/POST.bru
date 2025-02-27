@@ -1,0 +1,62 @@
+meta {
+  name: POST
+  type: http
+  seq: 6
+}
+
+post {
+  url: http://localhost:3000/api/clubs
+  body: json
+  auth: none
+}
+
+body:json {
+  [
+    {
+      "title": "Best Night at Club XYZ!",
+      "content": "Had an amazing time at Club XYZ! The DJ was fantastic, and the crowd was super energetic.",
+      "author": "john_doe",
+      "club_cafe": "Club XYZ",
+      "date": "2025-02-19T18:30:00Z",
+      "comments": [
+        {
+          "user": "alice_smith",
+          "comment": "I totally agree! The music was insane.",
+          "date": "2025-02-19T19:00:00Z"
+        }
+      ],
+      "likes": 10
+    },
+    {
+      "title": "Morning Coffee at Sunset Café",
+      "content": "Tried the cappuccino at Sunset Café today. It was the best I've ever had!",
+      "author": "emma_watson",
+      "club_cafe": "Sunset Café",
+      "date": "2025-02-18T08:15:00Z",
+      "comments": [
+        {
+          "user": "david_johnson",
+          "comment": "I love their coffee too! Their pastries are also great.",
+          "date": "2025-02-18T09:00:00Z"
+        }
+      ],
+      "likes": 15
+    },
+    {
+      "title": "Elite Lounge - A Hidden Gem",
+      "content": "Elite Lounge was an absolute delight! The ambiance, the service, and the drinks were all top-notch.",
+      "author": "michael_brown",
+      "club_cafe": "Elite Lounge",
+      "date": "2025-02-17T21:00:00Z",
+      "comments": [
+        {
+          "user": "john_doe",
+          "comment": "I've heard great things about it. Need to check it out!",
+          "date": "2025-02-17T21:30:00Z"
+        }
+      ],
+      "likes": 20
+    }
+  ]
+  
+}
