@@ -1,50 +1,51 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-import ClubCard from "./component/ClubCard"; // Ensure the correct path
 import axios from "axios";
+import LandingPage from "./component/LandingPage";
 import Signup from "./component/Signup";
+import AddEntity from "./component/AddEntity";
 
 const App = () => {
   const [users, setUsers] = useState([]);
 
+  // Fetch registered users
   useEffect(() => {
-      axios.get("http://localhost:5000/api/users") // ✅ Correct endpoint
-          .then(response => {
-              setUsers(response.data);
-          })
-          .catch(error => {
-              console.error("Error fetching users:", error);
-          });
+    axios.get("http://localhost:5000/api/users")
+      .then(response => setUsers(response.data))
+      .catch(error => console.error("Error fetching users:", error));
   }, []);
 
   return (
-    <div className="relative">
-      {/* Background Image */}
-      <div className="bg-image absolute top-0 left-0 w-full h-full z-[-1]"></div>
+    <Router>
+      <div className="relative">
+        <Routes>
+          {/* Landing Page */}
+          <Route path="/" element={<LandingPage />} />
+          
+          {/* Signup Page */}
+          <Route path="/signup" element={<Signup />} />
 
-      <div className="bg-gray-900 text-white min-h-screen flex flex-col items-center justify-center">
-        {/* Hero Section */}
-        <header className="text-center p-10">
-          <h1 className="text-4xl font-bold mb-4">Discover the Best Clubs & Cafes in Your City</h1>
-          <p className="text-lg mb-6">Explore top venues, share reviews, and connect with like-minded people.</p>
-          <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg">
-            Get Started
-          </button>
-        </header>
+          {/* Add Entity Page */}
+          <Route path="/add-entity" element={<AddEntity />} />
 
-        {/* Signup Component */}
-        <Signup />
-
-        {/* Registered Users */}
-        <h2 className="text-2xl text-white text-center mt-6">Registered Users</h2>
-        <ul className="text-white text-center">
-          {users.map((user) => (
-            <li key={user._id}>{user.name} - {user.email}</li>
-          ))}
-        </ul>
-    
+          {/* Registered Users List */}
+          <Route 
+            path="/users" 
+            element={
+              <div className="bg-gray-900 text-white min-h-screen flex flex-col items-center justify-center">
+                <h2 className="text-2xl text-white text-center mt-6">Registered Users</h2>
+                <ul className="text-white text-center">
+                  {users.map((user) => (
+                    <li key={user._id}>{user.name} - {user.email}</li>
+                  ))}
+                </ul>
+              </div>
+            } 
+          />
+        </Routes>
       </div>
-    </div>
+    </Router>
   );
 };
 

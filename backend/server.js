@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const connectDB = require("./MongoDB");
 const userRoutes = require("./routes/userRoutes");
+const entityRoutes = require("./routes/entityRoutes");
 
 
 const app = express();
@@ -17,6 +18,7 @@ connectDB();
 
 // API Routes
 app.use("/api/users", userRoutes); // ✅ Handles signup & user routes
+app.use("/api/entities", entityRoutes);
 
 // Test Route
 app.get("/", (req, res) => {

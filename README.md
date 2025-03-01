@@ -42,6 +42,8 @@ This project aims to create an engaging and user-specific platform where individ
 
 - CSS/SCSS: For styling and responsive design.
 
+- **Deployment-link** "s63-best-club-and-cafe.netlify.app"
+
 2. **Backend:**
 
 - Node.js: For server-side development.
