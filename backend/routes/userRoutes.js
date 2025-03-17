@@ -1,10 +1,10 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
-const User = require("../models/Club");
+const User = require("../models/Club"); // ✅ Corrected model
 
 const router = express.Router();
 
-// Signup Route
+// 📌 Signup Route
 router.post("/signup", async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -29,10 +29,10 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-// Get Users Route
-router.get("/", async (req, res) => {
+// 📌 Get Users (excluding passwords)
+router.get("/users", async (req, res) => {
   try {
-    const users = await User.find().select("-password"); // Exclude passwords
+    const users = await User.find().select("-password");
     res.json(users);
   } catch (error) {
     console.error("Error fetching users:", error);

@@ -1,33 +1,27 @@
 const express = require("express");
 const router = express.Router();
-const Club = require("../models/Club"); // Ensure correct model path
+const Club = require("../models/Club"); // Correct model
 
-// Create a new club
-router.post("/", async (req, res) => {
+// 📌 Create a new club
+router.post("/clubs", async (req, res) => {
   try {
     const { name, location, category, rating, reviews } = req.body;
-
-    // Validate input
+    
+    // Validate required fields
     if (!name || !location || !category || !rating) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
-    const newClub = new Club({
-      name,
-      location,
-      category,
-      rating,
-      reviews: reviews || [],
-    });
-
+    const newClub = new Club({ name, location, category, rating, reviews: reviews || [] });
     await newClub.save();
+    
     res.status(201).json({ message: "Club created successfully", data: newClub });
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message });
   }
 });
 
-// READ - Get all clubs
+// 📌 Get all clubs
 router.get("/clubs", async (req, res) => {
   try {
     const clubs = await Club.find();
@@ -37,34 +31,34 @@ router.get("/clubs", async (req, res) => {
   }
 });
 
-// READ - Get a single club by ID
+// 📌 Get a single club by ID
 router.get("/clubs/:id", async (req, res) => {
   try {
     const club = await Club.findById(req.params.id);
-    if (!club) {
-      return res.status(404).json({ message: "Club not found" });
-    }
+    if (!club) return res.status(404).json({ message: "Club not found" });
     res.json(club);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
-// UPDATE - Edit a club by ID
+// 📌 Update a club
 router.put("/clubs/:id", async (req, res) => {
   try {
     const updatedClub = await Club.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    res.json(updatedClub);
+    if (!updatedClub) return res.status(404).json({ message: "Club not found" });
+    res.json({ message: "Club updated!", data: updatedClub });
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 });
 
-// DELETE - Remove a club by ID
+// 📌 Delete a club
 router.delete("/clubs/:id", async (req, res) => {
   try {
-    await Club.findByIdAndDelete(req.params.id);
-    res.json({ message: "Club deleted successfully" });
+    const deletedClub = await Club.findByIdAndDelete(req.params.id);
+    if (!deletedClub) return res.status(404).json({ message: "Club not found" });
+    res.json({ message: "Club deleted!" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
