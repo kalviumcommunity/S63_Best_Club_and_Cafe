@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";  // ✅ Import useNavigate
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+ // ✅ Import Signup.css for styling
 
 const Signup = () => {
-  const navigate = useNavigate();  // ✅ Initialize navigate function
-
-
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({ name: "", email: "", password: "" });
   const [message, setMessage] = useState("");
 
@@ -20,40 +20,75 @@ const Signup = () => {
       setMessage(response.data.message);
       setFormData({ name: "", email: "", password: "" });
 
-       // ✅ Navigate to the Add Entity form after successful signup
-       setTimeout(() => {
+      // ✅ Navigate to the Add Entity form after successful signup
+      setTimeout(() => {
         navigate("/add-entity");
-      }, 1500);  // Delay for better UX
-      
+      }, 1500);
     } catch (error) {
       setMessage(error.response?.data?.message || "Error signing up");
     }
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white">
-      <h2 className="text-3xl font-bold mb-4">Signup</h2>
-      {message && <p className="text-green-500">{message}</p>}
-      
-      <form onSubmit={handleSubmit} className="bg-gray-800 p-6 rounded-lg shadow-md">
-        <input type="text" name="name" placeholder="Name" value={formData.name} onChange={handleChange}
-          className="w-full p-2 mb-3 border rounded-md bg-gray-700" required />
-        <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange}
-          className="w-full p-2 mb-3 border rounded-md bg-gray-700" required />
-        <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange}
-          className="w-full p-2 mb-3 border rounded-md bg-gray-700" required />
-        
-        <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg">
-          Signup
-        </button>
-      </form>
+    <div className="signup-container">
+      <motion.div
+        className="signup-box"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
+        <h2 className="signup-title">Create Your Account</h2>
 
-      {/* Go Back Button */}
-      <button 
-        onClick={() => navigate("/")}  // ✅ Navigate to Landing Page
-        className="mt-4 text-white underline hover:text-gray-400">
-        ← Back to Home
-      </button>
+        {message && <p className="signup-message">{message}</p>}
+
+        <form onSubmit={handleSubmit} className="signup-form">
+          <input
+            type="text"
+            name="name"
+            placeholder="Full Name"
+            value={formData.name}
+            onChange={handleChange}
+            className="signup-input"
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email Address"
+            value={formData.email}
+            onChange={handleChange}
+            className="signup-input"
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Create Password"
+            value={formData.password}
+            onChange={handleChange}
+            className="signup-input"
+            required
+          />
+
+          <motion.button
+            type="submit"
+            className="signup-button"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Sign Up 🚀
+          </motion.button>
+        </form>
+
+        {/* Go Back Button */}
+        <motion.button
+          onClick={() => navigate("/")}
+          className="back-button"
+          whileHover={{ scale: 1.1 }}
+        >
+          ← Back to Home
+        </motion.button>
+      </motion.div>
     </div>
   );
 };

@@ -1,0 +1,79 @@
+/* 🌟 Signup Page Background */
+.signup-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-image: url('https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y2x1YnxlbnwwfHwwfHx8MA%3D%3D'); /* Update with actual path */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  /* ✅ Dark Overlay Effect for Readability */
+  .signup-overlay {
+    background: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+  
+  /* ✅ Signup Form Styling */
+  .signup-form {
+    position: relative;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.1); /* Transparent White */
+    backdrop-filter: blur(10px); /* Blur Effect */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    color: white;
+    max-width: 400px;
+    width: 100%;
+  }
+  
+  /* ✅ Form Heading */
+  .signup-form h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+  }
+  
+  /* ✅ Input Fields */
+  .signup-form input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+  /* ✅ Submit Button */
+  .signup-btn {
+    width: 100%;
+    padding: 12px;
+    background: #ff4444;
+    color: white;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .signup-btn:hover {
+    background: #cc0000;
+  }
+  
+  /* ✅ Responsive Design */
+  @media (max-width: 500px) {
+    .signup-form {
+      width: 90%;
+    }
+  }
+  

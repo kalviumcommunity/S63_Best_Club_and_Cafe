@@ -1,0 +1,68 @@
+/* 🔥 Background for the Entities Section */
+.entities-section {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(34, 193, 195, 0.9));
+    padding: 40px;
+    border-radius: 10px;
+    margin-top: 20px;
+    text-align: center;
+    color: white;
+  }
+  
+  /* 🔥 Entity Card Styling */
+  .entities-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .entity-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    margin: 10px auto;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    transition: transform 0.3s;
+  }
+  
+  .entity-card:hover {
+    transform: scale(1.05);
+  }
+  
+  /* 🔥 Buttons */
+  .entity-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .edit-btn, .delete-btn {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .edit-btn {
+    background: #ffc107;
+    color: black;
+  }
+  
+  .delete-btn {
+    background: #ff4d4d;
+    color: white;
+  }
+  
+  .add-entity-btn {
+    background: #28a745;
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  .add-entity-btn:hover {
+    background: #218838;
+  }
+  
