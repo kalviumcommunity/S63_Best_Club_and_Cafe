@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
- // ✅ Ensure CSS file is imported
+ // Ensure this file exists and is styled
 
 const Navbar = () => {
   return (
@@ -13,6 +13,7 @@ const Navbar = () => {
         <li><Link to="/signup">Signup</Link></li>
         <li><Link to="/add-entity">Add Entity</Link></li>
         <li><Link to="/entities">Entities</Link></li>
+        <li><Link to="/select-user">Select User</Link></li> {/* New Link */}
       </ul>
     </nav>
   );

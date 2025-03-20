@@ -551,3 +551,92 @@ html, body {
   cursor: pointer;
   margin-top: 20px;
 }
+
+/* entitylist.css */
+/* User Dropdown */
+.user-dropdown {
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 10; /* Ensure dropdown is above other elements */
+}
+
+.user-dropdown select {
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  outline: none;
+  cursor: pointer;
+  appearance: none; /* Remove default arrow */
+  -webkit-appearance: none; /* For Safari */
+  -moz-appearance: none; /* For Firefox */
+}
+
+.user-dropdown::after {
+  content: "▼";
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none; /* Ensure clicks go to the select element */
+  color: white;
+}
+
+.user-dropdown select option {
+  background: #333; /* Background color for options */
+  color: white; /* Text color for options */
+}
+
+/* select user css */
+/* Select User Page */
+.select-user-container {
+  padding: 20px;
+  text-align: center;
+}
+
+.users-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.user-card {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s;
+  width: 200px;
+  text-align: center;
+}
+
+.user-card:hover {
+  transform: scale(1.05);
+}
+
+.selected-user-details {
+  margin-top: 30px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+}
+
+.back-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  background: #ff4b2b;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.back-button:hover {
+  background: #ff416c;
+}

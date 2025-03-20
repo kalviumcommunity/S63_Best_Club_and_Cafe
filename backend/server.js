@@ -37,6 +37,22 @@ app.delete("/api/entities/:id", async (req, res) => {
     res.status(500).json({ message: "Error deleting entity", error });
   }
 });
+app.put("/api/entities/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const updatedEntity = await EntityModel.findByIdAndUpdate(id, req.body, { new: true });
+
+        if (!updatedEntity) {
+            return res.status(404).json({ message: "Entity not found" });
+        }
+
+        res.json(updatedEntity);
+    } catch (error) {
+        res.status(500).json({ message: "Server error" });
+    }
+});
+
+
 
 
 // Start Server
