@@ -7,24 +7,58 @@ const EntitiesList = () => {
   const [entities, setEntities] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [users, setUsers] = useState([]);
+  const [selectedUser, setSelectedUser] = useState("");
 
-  // 🔄 Fetch all entities from the server
+  // 🔄 Fetch all entities and users from the server
   useEffect(() => {
+    // Fetch entities
     axios.get("http://localhost:5000/api/entities")
       .then(response => {
         setEntities(response.data);
-        setLoading(false);
       })
       .catch(error => {
         console.error("Error fetching entities:", error);
         setError("Failed to load entities. Please try again.");
+      });
+
+    // Fetch users
+    axios.get("http://localhost:5000/api/users")
+      .then(response => {
+        setUsers(response.data);
+      })
+      .catch(error => {
+        console.error("Error fetching users:", error);
+      })
+      .finally(() => {
         setLoading(false);
       });
   }, []);
 
+  // Filter entities when user selection changes
+  useEffect(() => {
+    if (selectedUser) {
+      axios.get(`http://localhost:5000/api/entities/user/${selectedUser}`)
+        .then(response => {
+          setEntities(response.data);
+        })
+        .catch(error => {
+          console.error("Error fetching user entities:", error);
+        });
+    } else {
+      // If no user selected, show all entities
+      axios.get("http://localhost:5000/api/entities")
+        .then(response => {
+          setEntities(response.data);
+        })
+        .catch(error => {
+          console.error("Error fetching entities:", error);
+        });
+    }
+  }, [selectedUser]);
+
   // 🗑️ Handle Delete Entity
-// 🗑️ Handle Delete Entity
-const handleDelete = async (id) => {
+  const handleDelete = async (id) => {
     try {
       const response = await axios.delete(`http://localhost:5000/api/entities/${id}`, {
         headers: { "Content-Type": "application/json" }
@@ -42,11 +76,25 @@ const handleDelete = async (id) => {
     }
   };
   
-  
   return (
     <div className="entities-container">
       <div className="entities-overlay"></div> {/* Background Overlay */}
       <h1>🌟 Best Clubs & Cafes in the City 🌟</h1>
+
+      {/* User selection dropdown */}
+      <div className="user-dropdown">
+        <select 
+          value={selectedUser} 
+          onChange={(e) => setSelectedUser(e.target.value)}
+        >
+          <option value="">All Users</option>
+          {users.map(user => (
+            <option key={user.id} value={user.id}>
+              {user.name} ({user.email})
+            </option>
+          ))}
+        </select>
+      </div>
 
       {loading ? (
         <p>Loading entities...</p>

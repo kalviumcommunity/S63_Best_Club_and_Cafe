@@ -40,6 +40,20 @@ router.get("/", async (req, res) => {
   }
 });
 
+// Get entities by user ID SQL 
+router.get('/user/:userId', async (req, res) => {
+  try {
+    const [rows] = await pool.query(
+      'SELECT * FROM entities WHERE created_by = ?',
+      [req.params.userId]
+    );
+    res.json(rows);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
 
 const mongoose = require("mongoose");
 
